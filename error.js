@@ -19,3 +19,10 @@ export class InvalidCodecError extends VideoError {
     this.name = "InvalidCodecError";
   }
 }
+
+export class VideoNotFoundError extends VideoError {
+  constructor(message = "Video Not Found", statusCode = 404) {
+    super(message, statusCode);
+    this.name = "VideoNotFoundError";
+  }
+}
