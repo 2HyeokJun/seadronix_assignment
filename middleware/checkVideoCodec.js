@@ -44,9 +44,8 @@ const checkIsAllowedCodec = (streamsArray) => {
 };
 
 const checkIsAllowedLength = (duration) => {
-  const ALLOWED_LENGTH = 40; // TODO: 60초로 변경
-  //   return duration >= ALLOWED_LENGTH;
-  return true;
+  const ALLOWED_LENGTH = 60; 
+  return duration >= ALLOWED_LENGTH;
 };
 
 export const checkMetadata = async (req, _, next) => {
