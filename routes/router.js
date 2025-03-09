@@ -56,7 +56,24 @@ const upload = multer({ dest: "uploads/" });
  *                         type: string
  *                         description: 분할된 비디오 파일 경로
  *       '400':
- *         description: 잘못된 요청 (지원하지 않는 비디오 형식 등)
+ *         description: 잘못된 비디오 파일 형식(비디오 파일이 아닌 경우)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: "error"
+ *                 error:
+ *                   type: object
+ *                   properties:
+ *                     name:
+ *                       type: string
+ *                       example: "InvalidFileError"
+ *                     message:
+ *                       type: string
+ *                       example: "Invalid file"
  */
 videoRouter.post(
   "/upload",
@@ -120,7 +137,7 @@ videoRouter.post(
  *                         type: string
  *                         description: 분할된 영상 파일 경로
  *       '404':
- *         description: 비디오를 찾을 수 없음
+ *         description: 비디오를 찾을 수 없음(잘못된 videoId)
  *         content:
  *           application/json:
  *             schema:
