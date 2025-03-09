@@ -75,3 +75,23 @@ export const selectSplitVideos = async ({
   const queryResult = await query(sql, paramArray);
   return queryResult;
 };
+
+export const createVideoTable = async () => {
+  const sql = `CREATE TABLE IF NOT EXISTS videos (
+    video_id INT AUTO_INCREMENT PRIMARY KEY,
+    original_filename VARCHAR(255) NOT NULL,
+    stored_filename VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)`;
+  await query(sql);
+};
+
+export const createSplittedVideoTable = async () => {
+  const sql = `CREATE TABLE IF NOT EXISTS video_splitted (
+    video_splitted_id INT AUTO_INCREMENT PRIMARY KEY,
+    video_id INT NOT NULL,
+    segment_number INT NOT NULL,
+    file_path VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (video_id) REFERENCES videos(video_id) ON DELETE CASCADE)`;
+  await query(sql);
+};
